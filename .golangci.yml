@@ -1,0 +1,42 @@
+# Linters to be enabled
+linters:
+  enable:
+    - golint          # Enforces Go idiomatic style conventions (e.g., naming conventions)
+    - govet           # Detects suspicious constructs and potential bugs in the code
+    - gocyclo         # Measures the complexity of functions (prevents overly complex functions)
+    - ineffassign     # Detects assignments to variables that are never used
+    - errcheck        # Ensures that errors are checked in the code (important for web apps interacting with databases or external services)
+    - gosec           # Detects security vulnerabilities in the code (e.g., hardcoded credentials, unsafe API usage)
+    - staticcheck     # Performs static analysis and checks for various issues like unused variables
+    - structcheck     # Detects structs or struct fields that are declared but not used
+    - unparam         # Detects function parameters that are not used in the function
+    - varcheck        # Detects variables that are declared but not used in the code
+    - deadcode        # Detects code that is not used anywhere (dead code)
+
+  # Linters to be disabled (can be turned off based on project needs)
+  disable:
+    - interfacer      # Can be disabled if interface checking isn't important for the project
+    - gosimple        # Can be disabled if the simplification rules are too aggressive
+
+  # Linters' specific settings
+  linters-settings:
+    gocyclo:
+      min-complexity: 15  # Minimum cyclomatic complexity for a function to be considered complex (default: 15)
+    errcheck:
+      exclude:
+        - .*_test\.go     # Exclude test files from error checking, as they often involve expected errors
+    gosec:
+      severity: "medium"  # Set minimum severity for security vulnerabilities to "medium"
+
+  # Files and directories to exclude from linting
+  exclude:
+    - vendor/           # Exclude the 'vendor' directory that contains third-party dependencies
+    - .*_test\.go       # Exclude test files from linting checks
+
+  # General run settings
+  run:
+    timeout: 5m         # Maximum time allowed for linting to run
+    tests: false        # Skip linting on test files by default
+
+# Performance settings for faster linting (useful for large projects)
+fast: true
