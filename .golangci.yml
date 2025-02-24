@@ -12,6 +12,8 @@ linters:
     - unparam         # Detects function parameters that are not used in the function
     - varcheck        # Detects variables that are declared but not used in the code
     - deadcode        # Detects code that is not used anywhere (dead code)
+    - gci             # Checks if code and import statements are formatted, with additional rules
+    - lll             # Enforces line length limits for better readability
 
   # Linters to be disabled (can be turned off based on project needs)
   disable:
@@ -27,6 +29,8 @@ linters:
         - .*_test\.go     # Exclude test files from error checking, as they often involve expected errors
     gosec:
       severity: "medium"  # Set minimum severity for security vulnerabilities to "medium"
+    lll:
+      line-length: 150    # Set the maximum line length to 150 characters
 
   # Files and directories to exclude from linting
   exclude:
